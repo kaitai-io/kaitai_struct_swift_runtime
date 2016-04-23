@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0048385A1CCA633900B7D738 /* KaitaiStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 004838591CCA633900B7D738 /* KaitaiStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004838611CCA633900B7D738 /* KaitaiStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004838561CCA633900B7D738 /* KaitaiStream.framework */; };
 		004838661CCA633900B7D738 /* KaitaiStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838651CCA633900B7D738 /* KaitaiStreamTests.swift */; };
+		004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838701CCA635300B7D738 /* KaitaiStream.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +24,12 @@
 
 /* Begin PBXFileReference section */
 		004838561CCA633900B7D738 /* KaitaiStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KaitaiStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		004838591CCA633900B7D738 /* KaitaiStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KaitaiStream.h; sourceTree = "<group>"; };
 		0048385B1CCA633900B7D738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004838601CCA633900B7D738 /* KaitaiStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KaitaiStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		004838651CCA633900B7D738 /* KaitaiStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaitaiStreamTests.swift; sourceTree = "<group>"; };
 		004838671CCA633900B7D738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		004838701CCA635300B7D738 /* KaitaiStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaitaiStream.swift; sourceTree = "<group>"; };
+		004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KaitaiStreamPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +72,9 @@
 		004838581CCA633900B7D738 /* KaitaiStream */ = {
 			isa = PBXGroup;
 			children = (
-				004838591CCA633900B7D738 /* KaitaiStream.h */,
 				0048385B1CCA633900B7D738 /* Info.plist */,
+				004838701CCA635300B7D738 /* KaitaiStream.swift */,
+				004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */,
 			);
 			path = KaitaiStream;
 			sourceTree = "<group>";
@@ -93,7 +95,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0048385A1CCA633900B7D738 /* KaitaiStream.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +309,7 @@
 		0048386B1CCA633900B7D738 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -319,12 +322,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry-marochko.KaitaiStream";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		0048386C1CCA633900B7D738 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
