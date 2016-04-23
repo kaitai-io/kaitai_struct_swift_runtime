@@ -10,6 +10,9 @@
 		004838611CCA633900B7D738 /* KaitaiStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004838561CCA633900B7D738 /* KaitaiStream.framework */; };
 		004838661CCA633900B7D738 /* KaitaiStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838651CCA633900B7D738 /* KaitaiStreamTests.swift */; };
 		004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838701CCA635300B7D738 /* KaitaiStream.swift */; };
+		0048387E1CCB974500B7D738 /* Deflate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0048387D1CCB974500B7D738 /* Deflate.swift */; };
+		004838801CCB991D00B7D738 /* KaitaiStream-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 0048387F1CCB991D00B7D738 /* KaitaiStream-Bridging-Header.h */; };
+		004838841CCB9E4000B7D738 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004838831CCB9E4000B7D738 /* libz.1.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +33,9 @@
 		004838671CCA633900B7D738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004838701CCA635300B7D738 /* KaitaiStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaitaiStream.swift; sourceTree = "<group>"; };
 		004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KaitaiStreamPlayground.playground; sourceTree = "<group>"; };
+		0048387D1CCB974500B7D738 /* Deflate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deflate.swift; sourceTree = "<group>"; };
+		0048387F1CCB991D00B7D738 /* KaitaiStream-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KaitaiStream-Bridging-Header.h"; sourceTree = "<group>"; };
+		004838831CCB9E4000B7D738 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004838841CCB9E4000B7D738 /* libz.1.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +61,7 @@
 		0048384C1CCA633900B7D738 = {
 			isa = PBXGroup;
 			children = (
+				004838831CCB9E4000B7D738 /* libz.1.tbd */,
 				004838581CCA633900B7D738 /* KaitaiStream */,
 				004838641CCA633900B7D738 /* KaitaiStreamTests */,
 				004838571CCA633900B7D738 /* Products */,
@@ -72,6 +80,8 @@
 		004838581CCA633900B7D738 /* KaitaiStream */ = {
 			isa = PBXGroup;
 			children = (
+				0048387F1CCB991D00B7D738 /* KaitaiStream-Bridging-Header.h */,
+				0048387D1CCB974500B7D738 /* Deflate.swift */,
 				0048385B1CCA633900B7D738 /* Info.plist */,
 				004838701CCA635300B7D738 /* KaitaiStream.swift */,
 				004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */,
@@ -95,6 +105,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004838801CCB991D00B7D738 /* KaitaiStream-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */,
+				0048387E1CCB974500B7D738 /* Deflate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +334,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry-marochko.KaitaiStream";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/KaitaiStream/KaitaiStream-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -342,6 +356,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry-marochko.KaitaiStream";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/KaitaiStream/KaitaiStream-Bridging-Header.h";
 			};
 			name = Release;
 		};

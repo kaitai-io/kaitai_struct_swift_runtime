@@ -26,7 +26,7 @@ extension String: KaitaiStreamProtocol {
 
             return stream
         }
-
+        
         set(value) {
             objc_setAssociatedObject(self,&AssociatedKeys.kaitaiStream,value,objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -400,6 +400,50 @@ public class KaitaiStream {
 
             buffer.append(byte)
         }
+    }
+
+    public func processZlib(bytes:[UInt8]) -> [UInt8]? {
+        let inflater = InflateStream()
+
+        var buffer = Array(bytes)
+        let (inflated,err) = inflater.write(&buffer, flush: true)
+
+        guard err == nil else {
+            return nil
+        }
+
+        return inflated
+    }
+
+    public func processRotateLeft(bytes:[UInt8],amount:UInt,groupSize:Int=1) -> [UInt8]? {
+        var r = [UInt8](count:0, repeatedValue:0)
+
+        switch groupSize {
+        case 1:
+            for i in 0..<bytes.count {
+                let byte = UInt(bytes[i])
+
+                r[i] = UInt8((((byte & 0xff) << amount) | ((byte & 0xff) >> (8 - amount))));
+            }
+        default:
+            return nil
+        }
+
+        return r
+    }
+
+    public func byteArrayToHex(bytes:[UInt8]) -> String {
+        var string = "";
+
+        for i in 0..<bytes.count {
+            if i > 0 {
+                string += " "
+            }
+
+            string += String(format:"%02x", bytes[i])
+        }
+
+        return string
     }
 }
 

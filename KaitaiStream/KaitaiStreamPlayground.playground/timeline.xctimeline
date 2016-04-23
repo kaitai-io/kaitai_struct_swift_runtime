@@ -3,7 +3,12 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/mothlike/devel/Xcode/KaitaiStream/KaitaiStream/KaitaiStreamPlayground.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=471&amp;EndingLineNumber=10&amp;StartingLineNumber=9&amp;Timestamp=483099403.975258"
+         documentLocation = "file:///Users/mothlike/devel/Xcode/KaitaiStream/KaitaiStream/KaitaiStreamPlayground.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=847&amp;EndingLineNumber=10&amp;StartingLineNumber=9&amp;Timestamp=483107509.150977"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/mothlike/devel/Xcode/KaitaiStream/KaitaiStream/KaitaiStreamPlayground.playground#CharacterRangeLen=41&amp;CharacterRangeLoc=777&amp;EndingLineNumber=35&amp;StartingLineNumber=35&amp;Timestamp=483107509.151145"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
