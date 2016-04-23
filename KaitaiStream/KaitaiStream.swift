@@ -71,11 +71,11 @@ public class KaitaiStream {
     }
 
     public init(bytes:[UInt8]) {
-        stream = BytesSeekableStream(bytes)
+        stream = BytesSeekableStream(bytes: bytes)
     }
 
     public init(data:NSData) {
-        stream = NSDataSeekableStream(data);
+        stream = NSDataSeekableStream(data: data);
     }
 
     public init?(path:String) {
@@ -469,7 +469,7 @@ private class BytesSeekableStream:KaitaiSeekableStreamProtocol {
         return !(position < size)
     }
 
-    init(_ bytes:[UInt8]) {
+    init(bytes:[UInt8]) {
         self.bytes = bytes
         self.size = bytes.count
     }
@@ -518,7 +518,7 @@ private class NSDataSeekableStream:KaitaiSeekableStreamProtocol {
         return !(position < size)
     }
 
-    init(_ data:NSData) {
+    init(data:NSData) {
         self.data = data
         self.size = data.length
     }
