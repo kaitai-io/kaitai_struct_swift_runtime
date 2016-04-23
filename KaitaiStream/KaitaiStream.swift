@@ -9,7 +9,7 @@
 import Foundation
 
 private struct AssociatedKeys {
-    static var kaitaiStream = "displayed"
+    static var kaitaiStream = "kaitaiStream"
 }
 
 // #pragma mark - KaitaiStream
