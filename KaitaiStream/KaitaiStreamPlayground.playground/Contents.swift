@@ -14,8 +14,9 @@ ks.seek(1)
 ks.readS1()
 
 ks.seek(0)
-ks.readStrEos(NSUTF8StringEncoding)
+String(kaitaiStream: ks, encoding: NSUTF8StringEncoding)
 ks.seek(0)
-ks.readStrByteLimit(NSUTF8StringEncoding,length: 4)
+String(kaitaiStream: ks, length: 4, encoding: NSUTF8StringEncoding)
 ks.seek(0)
-ks.readStrz(NSUTF8StringEncoding, termination: 10)
+let a = String(kaitaiStream: ks, termination: 10, encoding: NSUTF8StringEncoding)
+a?.kaitaiStream

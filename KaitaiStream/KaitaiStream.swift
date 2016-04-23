@@ -2,16 +2,62 @@
 //  KaitaiStream.swift
 //  KaitaiStream
 //
-//  Created by Mothlike on 22.04.16.
+//  Created by Dmitry Marochko on 22.04.16.
 //
 //
 
 import Foundation
 
+private struct AssociatedKeys {
+    static var kaitaiStream = "displayed"
+}
+
 // #pragma mark - KaitaiStream
-public protocol KaitaiStreamInitFromStreamProtocol {
-    var kaitaiStream:KaitaiStream { get }
-    init(kaitaiStream:KaitaiStream)
+public protocol KaitaiStreamProtocol {
+    var kaitaiStream:KaitaiStream? { get }
+}
+
+extension String: KaitaiStreamProtocol {
+    public private(set) var kaitaiStream:KaitaiStream? {
+        get {
+            guard let stream = objc_getAssociatedObject(self, &AssociatedKeys.kaitaiStream) as? KaitaiStream else {
+                return nil
+            }
+
+            return stream
+        }
+
+        set(value) {
+            objc_setAssociatedObject(self,&AssociatedKeys.kaitaiStream,value,objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    public init?(kaitaiStream:KaitaiStream, encoding:NSStringEncoding) {
+        guard let string = kaitaiStream.readStrEos(encoding) else {
+            return nil
+        }
+
+        self = string
+        self.kaitaiStream = kaitaiStream
+    }
+
+    public init?(kaitaiStream:KaitaiStream, length:Int, encoding:NSStringEncoding) {
+        guard let string = kaitaiStream.readStrByteLimit(length,encoding: encoding) else {
+            return nil
+        }
+
+        self = string
+        self.kaitaiStream = kaitaiStream
+    }
+
+    public init?(kaitaiStream:KaitaiStream, termination:UInt8, encoding:NSStringEncoding, includeTermination:Bool=false,consumeTermination:Bool=true) {
+        guard let string = kaitaiStream.readStrz(termination, encoding: encoding, includeTermination: includeTermination, consumeTermination: consumeTermination) else {
+            return nil
+        }
+
+        self = string
+        self.kaitaiStream = kaitaiStream
+    }
 }
 
 public class KaitaiStream {
@@ -312,18 +358,24 @@ public class KaitaiStream {
             return nil
         }
 
-        return String(bytes: bytes, encoding: encoding)
+        var string = String(bytes: bytes, encoding: encoding)
+        string?.kaitaiStream = self
+
+        return string
     }
 
-    public func readStrByteLimit(encoding: NSStringEncoding, length:Int) -> String? {
+    public func readStrByteLimit(length:Int, encoding: NSStringEncoding) -> String? {
         guard let bytes = readBytes(length) else {
             return nil
         }
 
-        return String(bytes: bytes, encoding: encoding)
+        var string = String(bytes: bytes, encoding: encoding)
+        string?.kaitaiStream = self
+
+        return string
     }
 
-    public func readStrz(encoding:NSStringEncoding, termination:UInt8, includeTermination:Bool=false,consumeTermination:Bool=true) -> String? {
+    public func readStrz(termination:UInt8, encoding:NSStringEncoding, includeTermination:Bool=false,consumeTermination:Bool=true) -> String? {
         var buffer = [UInt8]()
 
         while true {
@@ -340,7 +392,10 @@ public class KaitaiStream {
                     stream.seek(stream.position - 1)
                 }
 
-                return String(bytes:buffer, encoding: encoding)
+                var string = String(bytes: buffer, encoding: encoding)
+                string?.kaitaiStream = self
+
+                return string
             }
 
             buffer.append(byte)
