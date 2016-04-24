@@ -26,7 +26,7 @@ extension String: KaitaiStreamProtocol {
 
             return stream
         }
-        
+
         set(value) {
             objc_setAssociatedObject(self,&AssociatedKeys.kaitaiStream,value,objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -61,7 +61,7 @@ extension String: KaitaiStreamProtocol {
 }
 
 public class KaitaiStream {
-    private var stream:KaitaiSeekableStreamProtocol
+    private var stream:KaitaiSeekableStream
 
     public var position:Int {
         return stream.position
@@ -71,7 +71,7 @@ public class KaitaiStream {
     }
 
     public init(bytes:[UInt8]) {
-        stream = BytesSeekableStream(bytes: bytes)
+        stream = ByteArraySeekableStream(bytes: bytes)
     }
 
     public init(data:NSData) {
@@ -454,7 +454,7 @@ public class KaitaiStream {
 }
 
 // #pragma mark - Streams
-private protocol KaitaiSeekableStreamProtocol {
+private protocol KaitaiSeekableStream {
     var position:Int { get }
     var isEOF:Bool { get }
 
@@ -463,7 +463,7 @@ private protocol KaitaiSeekableStreamProtocol {
     func read(length:Int) -> [UInt8]?
 }
 
-private class BytesSeekableStream:KaitaiSeekableStreamProtocol {
+private class ByteArraySeekableStream:KaitaiSeekableStream {
     private let bytes:[UInt8]
 
     private(set) var position:Int = 0
@@ -509,7 +509,7 @@ private class BytesSeekableStream:KaitaiSeekableStreamProtocol {
     }
 }
 
-private class NSDataSeekableStream:KaitaiSeekableStreamProtocol {
+private class NSDataSeekableStream:KaitaiSeekableStream {
     private let data:NSData
 
     private(set) var position:Int = 0
@@ -564,7 +564,7 @@ private class NSDataSeekableStream:KaitaiSeekableStreamProtocol {
     }
 }
 
-private class NSFileHandleSeekableStream:KaitaiSeekableStreamProtocol {
+private class NSFileHandleSeekableStream:KaitaiSeekableStream {
     private let file:NSFileHandle
 
     private(set) var position:Int = 0
@@ -575,10 +575,10 @@ private class NSFileHandleSeekableStream:KaitaiSeekableStreamProtocol {
         if byte != nil {
             seek(position-1)
         }
-        
+
         return byte == nil
     }
-    
+
     init?(path:String) {
         guard let file = NSFileHandle(forReadingAtPath: path) else {
             return nil
@@ -591,50 +591,50 @@ private class NSFileHandleSeekableStream:KaitaiSeekableStreamProtocol {
         guard let file = try? NSFileHandle(forReadingFromURL:url) else {
             return nil
         }
-
+        
         self.file = file
     }
-
+    
     deinit {
         file.closeFile()
     }
-
+    
     func seek(position: Int) {
         self.position = position
         file.seekToFileOffset(UInt64(position))
     }
-
+    
     func read() -> UInt8? {
         let data = file.readDataOfLength(1)
-
+        
         guard data.length == 1 else {
             seek(position)
-
+            
             return nil
         }
-
+        
         var bytes = [UInt8](count: 1, repeatedValue: 0)
         data.getBytes(&bytes, length: 1)
-
+        
         position += 1
-
+        
         return bytes[0]
     }
-
+    
     func read(length: Int) -> [UInt8]? {
         let data = file.readDataOfLength(length)
-
+        
         guard data.length == length else {
             seek(position)
-
+            
             return nil
         }
-
+        
         var bytes = [UInt8](count: length, repeatedValue: 0)
         data.getBytes(&bytes, length: length)
-
+        
         position += length
-
+        
         return bytes
     }
 }
