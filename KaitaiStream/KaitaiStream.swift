@@ -334,7 +334,13 @@ public class KaitaiStream {
     }
 
     public func readBytesFull() -> [UInt8]? {
-        guard let bytes = stream.read(stream.size - position) else {
+        var bytes = [UInt8]()
+
+        while let byte = stream.read() {
+            bytes.append(byte)
+        }
+
+        guard bytes.count > 0 else {
             return nil
         }
 
@@ -376,7 +382,7 @@ public class KaitaiStream {
     }
 
     public func readStrz(termination:UInt8, encoding:NSStringEncoding, includeTermination:Bool=false,consumeTermination:Bool=true) -> String? {
-        var buffer = [UInt8]()
+        var bytes = [UInt8]()
 
         while true {
             guard let byte = stream.read() else {
@@ -385,28 +391,28 @@ public class KaitaiStream {
 
             if byte == termination {
                 if includeTermination {
-                    buffer.append(byte)
+                    bytes.append(byte)
                 }
 
                 if !consumeTermination {
                     stream.seek(stream.position - 1)
                 }
 
-                var string = String(bytes: buffer, encoding: encoding)
+                var string = String(bytes: bytes, encoding: encoding)
                 string?.kaitaiStream = self
 
                 return string
             }
 
-            buffer.append(byte)
+            bytes.append(byte)
         }
     }
 
     public func processZlib(bytes:[UInt8]) -> [UInt8]? {
         let inflater = InflateStream()
 
-        var buffer = Array(bytes)
-        let (inflated,err) = inflater.write(&buffer, flush: true)
+        var bytes = Array(bytes)
+        let (inflated,err) = inflater.write(&bytes, flush: true)
 
         guard err == nil else {
             return nil
@@ -450,7 +456,6 @@ public class KaitaiStream {
 // #pragma mark - Streams
 private protocol KaitaiSeekableStreamProtocol {
     var position:Int { get }
-    var size:Int { get }
     var isEOF:Bool { get }
 
     func seek(position:Int)
@@ -463,15 +468,12 @@ private class BytesSeekableStream:KaitaiSeekableStreamProtocol {
 
     private(set) var position:Int = 0
 
-    let size:Int
-
     var isEOF:Bool {
-        return !(position < size)
+        return !(position < bytes.count)
     }
 
     init(bytes:[UInt8]) {
         self.bytes = bytes
-        self.size = bytes.count
     }
 
     func seek(position: Int) {
@@ -495,7 +497,7 @@ private class BytesSeekableStream:KaitaiSeekableStreamProtocol {
             return nil
         }
 
-        guard position + length <= size else {
+        guard position + length <= bytes.count else {
             return nil
         }
 
@@ -512,15 +514,12 @@ private class NSDataSeekableStream:KaitaiSeekableStreamProtocol {
 
     private(set) var position:Int = 0
 
-    let size:Int
-
     var isEOF:Bool {
-        return !(position < size)
+        return !(position < data.length)
     }
 
     init(data:NSData) {
         self.data = data
-        self.size = data.length
     }
 
     func seek(position: Int) {
@@ -532,13 +531,13 @@ private class NSDataSeekableStream:KaitaiSeekableStreamProtocol {
             return nil
         }
 
-        var buffer = [UInt8](count: 1, repeatedValue: 0)
+        var bytes = [UInt8](count: 1, repeatedValue: 0)
 
-        data.getBytes(&buffer, length: 1)
+        data.getBytes(&bytes, length: 1)
 
         position += 1
 
-        return buffer[0]
+        return bytes[0]
     }
 
     func read(length: Int) -> [UInt8]? {
@@ -546,22 +545,22 @@ private class NSDataSeekableStream:KaitaiSeekableStreamProtocol {
             return nil
         }
 
-        guard position + length <= size else {
+        guard position + length <= data.length else {
             return nil
         }
 
-        var buffer = [UInt8](count: length, repeatedValue: 0)
+        var bytes = [UInt8](count: length, repeatedValue: 0)
 
         if position == 0 {
-            data.getBytes(&buffer, length: length)
+            data.getBytes(&bytes, length: length)
         } else {
             let range = NSRange(location: position, length: length)
-            data.getBytes(&buffer, range: range)
+            data.getBytes(&bytes, range: range)
         }
 
         position += length
 
-        return buffer
+        return bytes
     }
 }
 
@@ -570,21 +569,22 @@ private class NSFileHandleSeekableStream:KaitaiSeekableStreamProtocol {
 
     private(set) var position:Int = 0
 
-    let size:Int
-
     var isEOF:Bool {
-        return !(position < size)
-    }
+        let byte = read()
 
+        if byte != nil {
+            seek(position-1)
+        }
+        
+        return byte == nil
+    }
+    
     init?(path:String) {
         guard let file = NSFileHandle(forReadingAtPath: path) else {
             return nil
         }
 
         self.file = file
-        self.size = Int(file.seekToEndOfFile())
-
-        self.file.seekToFileOffset(0)
     }
 
     init?(url:NSURL) {
@@ -593,9 +593,6 @@ private class NSFileHandleSeekableStream:KaitaiSeekableStreamProtocol {
         }
 
         self.file = file
-        self.size = Int(file.seekToEndOfFile())
-
-        self.file.seekToFileOffset(0)
     }
 
     deinit {
@@ -608,36 +605,36 @@ private class NSFileHandleSeekableStream:KaitaiSeekableStreamProtocol {
     }
 
     func read() -> UInt8? {
-        guard !isEOF else {
+        let data = file.readDataOfLength(1)
+
+        guard data.length == 1 else {
+            seek(position)
+
             return nil
         }
 
-        let data = file.readDataOfLength(1)
-
-        var buffer = [UInt8](count: 1, repeatedValue: 0)
-        data.getBytes(&buffer, length: 1)
+        var bytes = [UInt8](count: 1, repeatedValue: 0)
+        data.getBytes(&bytes, length: 1)
 
         position += 1
 
-        return buffer[0]
+        return bytes[0]
     }
 
     func read(length: Int) -> [UInt8]? {
-        guard !isEOF else {
-            return nil
-        }
-
-        guard position + length <= size else {
-            return nil
-        }
-
         let data = file.readDataOfLength(length)
 
-        var buffer = [UInt8](count: length, repeatedValue: 0)
-        data.getBytes(&buffer, length: length)
+        guard data.length == length else {
+            seek(position)
+
+            return nil
+        }
+
+        var bytes = [UInt8](count: length, repeatedValue: 0)
+        data.getBytes(&bytes, length: length)
 
         position += length
-        
-        return buffer
+
+        return bytes
     }
 }
