@@ -12,6 +12,9 @@
 		004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838701CCA635300B7D738 /* KaitaiStream.swift */; };
 		0048387E1CCB974500B7D738 /* Deflate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0048387D1CCB974500B7D738 /* Deflate.swift */; };
 		004838841CCB9E4000B7D738 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004838831CCB9E4000B7D738 /* libz.1.tbd */; };
+		0089C8921CCE40160023CE7C /* KaitaiStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8911CCE40160023CE7C /* KaitaiStruct.swift */; };
+		0089C8941CCE41530023CE7C /* String+KaitaiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8931CCE41530023CE7C /* String+KaitaiStream.swift */; };
+		0089C8961CCE42100023CE7C /* KaitaiSeekableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,9 @@
 		004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KaitaiStreamPlayground.playground; sourceTree = "<group>"; };
 		0048387D1CCB974500B7D738 /* Deflate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deflate.swift; sourceTree = "<group>"; };
 		004838831CCB9E4000B7D738 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		0089C8911CCE40160023CE7C /* KaitaiStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaitaiStruct.swift; sourceTree = "<group>"; };
+		0089C8931CCE41530023CE7C /* String+KaitaiStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+KaitaiStream.swift"; sourceTree = "<group>"; };
+		0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaitaiSeekableStream.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,9 @@
 				0048387D1CCB974500B7D738 /* Deflate.swift */,
 				0048385B1CCA633900B7D738 /* Info.plist */,
 				004838701CCA635300B7D738 /* KaitaiStream.swift */,
+				0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */,
+				0089C8931CCE41530023CE7C /* String+KaitaiStream.swift */,
+				0089C8911CCE40160023CE7C /* KaitaiStruct.swift */,
 				004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */,
 			);
 			path = KaitaiStream;
@@ -202,6 +211,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0089C8961CCE42100023CE7C /* KaitaiSeekableStream.swift in Sources */,
+				0089C8921CCE40160023CE7C /* KaitaiStruct.swift in Sources */,
+				0089C8941CCE41530023CE7C /* String+KaitaiStream.swift in Sources */,
 				004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */,
 				0048387E1CCB974500B7D738 /* Deflate.swift in Sources */,
 			);
@@ -398,6 +410,7 @@
 				0048386C1CCA633900B7D738 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0048386D1CCA633900B7D738 /* Build configuration list for PBXNativeTarget "KaitaiStreamTests" */ = {
 			isa = XCConfigurationList;
@@ -406,6 +419,7 @@
 				0048386F1CCA633900B7D738 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
