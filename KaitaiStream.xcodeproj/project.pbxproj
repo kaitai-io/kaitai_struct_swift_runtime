@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		004838611CCA633900B7D738 /* KaitaiStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004838561CCA633900B7D738 /* KaitaiStream.framework */; };
-		004838661CCA633900B7D738 /* KaitaiStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838651CCA633900B7D738 /* KaitaiStreamTests.swift */; };
 		004838711CCA635300B7D738 /* KaitaiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004838701CCA635300B7D738 /* KaitaiStream.swift */; };
 		0048387E1CCB974500B7D738 /* Deflate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0048387D1CCB974500B7D738 /* Deflate.swift */; };
 		004838841CCB9E4000B7D738 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 004838831CCB9E4000B7D738 /* libz.1.tbd */; };
@@ -17,24 +15,10 @@
 		0089C8961CCE42100023CE7C /* KaitaiSeekableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		004838621CCA633900B7D738 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0048384D1CCA633900B7D738 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 004838551CCA633900B7D738;
-			remoteInfo = KaitaiStream;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		004838561CCA633900B7D738 /* KaitaiStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KaitaiStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0048385B1CCA633900B7D738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		004838601CCA633900B7D738 /* KaitaiStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KaitaiStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		004838651CCA633900B7D738 /* KaitaiStreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaitaiStreamTests.swift; sourceTree = "<group>"; };
-		004838671CCA633900B7D738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004838701CCA635300B7D738 /* KaitaiStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaitaiStream.swift; sourceTree = "<group>"; };
-		004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = KaitaiStreamPlayground.playground; sourceTree = "<group>"; };
 		0048387D1CCB974500B7D738 /* Deflate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deflate.swift; sourceTree = "<group>"; };
 		004838831CCB9E4000B7D738 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		0089C8911CCE40160023CE7C /* KaitaiStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaitaiStruct.swift; sourceTree = "<group>"; };
@@ -51,14 +35,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0048385D1CCA633900B7D738 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				004838611CCA633900B7D738 /* KaitaiStream.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -67,7 +43,6 @@
 			children = (
 				004838831CCB9E4000B7D738 /* libz.1.tbd */,
 				004838581CCA633900B7D738 /* KaitaiStream */,
-				004838641CCA633900B7D738 /* KaitaiStreamTests */,
 				004838571CCA633900B7D738 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,7 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				004838561CCA633900B7D738 /* KaitaiStream.framework */,
-				004838601CCA633900B7D738 /* KaitaiStreamTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,18 +64,8 @@
 				0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */,
 				0089C8931CCE41530023CE7C /* String+KaitaiStream.swift */,
 				0089C8911CCE40160023CE7C /* KaitaiStruct.swift */,
-				004838721CCA636200B7D738 /* KaitaiStreamPlayground.playground */,
 			);
 			path = KaitaiStream;
-			sourceTree = "<group>";
-		};
-		004838641CCA633900B7D738 /* KaitaiStreamTests */ = {
-			isa = PBXGroup;
-			children = (
-				004838651CCA633900B7D738 /* KaitaiStreamTests.swift */,
-				004838671CCA633900B7D738 /* Info.plist */,
-			);
-			path = KaitaiStreamTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,24 +99,6 @@
 			productReference = 004838561CCA633900B7D738 /* KaitaiStream.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		0048385F1CCA633900B7D738 /* KaitaiStreamTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0048386D1CCA633900B7D738 /* Build configuration list for PBXNativeTarget "KaitaiStreamTests" */;
-			buildPhases = (
-				0048385C1CCA633900B7D738 /* Sources */,
-				0048385D1CCA633900B7D738 /* Frameworks */,
-				0048385E1CCA633900B7D738 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				004838631CCA633900B7D738 /* PBXTargetDependency */,
-			);
-			name = KaitaiStreamTests;
-			productName = KaitaiStreamTests;
-			productReference = 004838601CCA633900B7D738 /* KaitaiStreamTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,14 +106,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Dmitry Marochko";
 				TargetAttributes = {
 					004838551CCA633900B7D738 = {
 						CreatedOnToolsVersion = 7.3;
-					};
-					0048385F1CCA633900B7D738 = {
-						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -184,20 +128,12 @@
 			projectRoot = "";
 			targets = (
 				004838551CCA633900B7D738 /* KaitaiStream */,
-				0048385F1CCA633900B7D738 /* KaitaiStreamTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		004838541CCA633900B7D738 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0048385E1CCA633900B7D738 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,23 +155,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0048385C1CCA633900B7D738 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				004838661CCA633900B7D738 /* KaitaiStreamTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		004838631CCA633900B7D738 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 004838551CCA633900B7D738 /* KaitaiStream */;
-			targetProxy = 004838621CCA633900B7D738 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		004838681CCA633900B7D738 /* Debug */ = {
@@ -252,8 +172,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -300,8 +222,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -321,6 +245,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -345,6 +270,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -366,28 +292,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-			};
-			name = Release;
-		};
-		0048386E1CCA633900B7D738 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = KaitaiStreamTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry-marochko.KaitaiStreamTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		0048386F1CCA633900B7D738 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = KaitaiStreamTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry-marochko.KaitaiStreamTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -408,15 +313,6 @@
 			buildConfigurations = (
 				0048386B1CCA633900B7D738 /* Debug */,
 				0048386C1CCA633900B7D738 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0048386D1CCA633900B7D738 /* Build configuration list for PBXNativeTarget "KaitaiStreamTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0048386E1CCA633900B7D738 /* Debug */,
-				0048386F1CCA633900B7D738 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

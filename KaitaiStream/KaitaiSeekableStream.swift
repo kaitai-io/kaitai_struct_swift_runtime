@@ -12,15 +12,15 @@ protocol KaitaiSeekableStream {
     var position:Int { get }
     var isEOF:Bool { get }
 
-    func seek(position:Int)
+    func seek(_ position:Int)
     func read() -> UInt8?
-    func read(length:Int) -> [UInt8]?
+    func read(_ length:Int) -> [UInt8]?
 }
 
-class ByteArraySeekableStream:KaitaiSeekableStream {
-    private let bytes:[UInt8]
+class ByteArraySeekableStream : KaitaiSeekableStream {
+    fileprivate let bytes:[UInt8];
 
-    private(set) var position:Int = 0
+    fileprivate(set) var position:Int = 0;
 
     var isEOF:Bool {
         return !(position < bytes.count)
@@ -30,7 +30,7 @@ class ByteArraySeekableStream:KaitaiSeekableStream {
         self.bytes = bytes
     }
 
-    func seek(position: Int) {
+    func seek(_ position: Int) {
         self.position = position
     }
 
@@ -46,7 +46,7 @@ class ByteArraySeekableStream:KaitaiSeekableStream {
         return value
     }
 
-    func read(length: Int) -> [UInt8]? {
+    func read(_ length: Int) -> [UInt8]? {
         guard !isEOF else {
             return nil
         }
@@ -64,19 +64,19 @@ class ByteArraySeekableStream:KaitaiSeekableStream {
 }
 
 class NSDataSeekableStream:KaitaiSeekableStream {
-    private let data:NSData
+    fileprivate let data:Data
 
-    private(set) var position:Int = 0
+    fileprivate(set) var position:Int = 0
 
     var isEOF:Bool {
-        return !(position < data.length)
+        return !(position < data.count)
     }
 
-    init(data:NSData) {
+    init(data:Data) {
         self.data = data
     }
 
-    func seek(position: Int) {
+    func seek(_ position: Int) {
         self.position = position
     }
 
@@ -85,31 +85,31 @@ class NSDataSeekableStream:KaitaiSeekableStream {
             return nil
         }
 
-        var bytes = [UInt8](count: 1, repeatedValue: 0)
+        var bytes = [UInt8](repeating: 0, count: 1)
 
-        data.getBytes(&bytes, length: 1)
+        (data as NSData).getBytes(&bytes, length: 1)
 
         position += 1
 
         return bytes[0]
     }
 
-    func read(length: Int) -> [UInt8]? {
+    func read(_ length: Int) -> [UInt8]? {
         guard !isEOF else {
             return nil
         }
 
-        guard position + length <= data.length else {
+        guard position + length <= data.count else {
             return nil
         }
 
-        var bytes = [UInt8](count: length, repeatedValue: 0)
+        var bytes = [UInt8](repeating: 0, count: length)
 
         if position == 0 {
-            data.getBytes(&bytes, length: length)
+            (data as NSData).getBytes(&bytes, length: length)
         } else {
             let range = NSRange(location: position, length: length)
-            data.getBytes(&bytes, range: range)
+            (data as NSData).getBytes(&bytes, range: range)
         }
 
         position += length
@@ -119,9 +119,9 @@ class NSDataSeekableStream:KaitaiSeekableStream {
 }
 
 class NSFileHandleSeekableStream:KaitaiSeekableStream {
-    private let file:NSFileHandle
+    fileprivate let file:FileHandle
 
-    private(set) var position:Int = 0
+    fileprivate(set) var position:Int = 0
 
     var isEOF:Bool {
         let byte = read()
@@ -134,15 +134,15 @@ class NSFileHandleSeekableStream:KaitaiSeekableStream {
     }
 
     init?(path:String) {
-        guard let file = NSFileHandle(forReadingAtPath: path) else {
+        guard let file = FileHandle(forReadingAtPath: path) else {
             return nil
         }
 
         self.file = file
     }
 
-    init?(url:NSURL) {
-        guard let file = try? NSFileHandle(forReadingFromURL:url) else {
+    init?(url:URL) {
+        guard let file = try? FileHandle(forReadingFrom:url) else {
             return nil
         }
 
@@ -153,39 +153,39 @@ class NSFileHandleSeekableStream:KaitaiSeekableStream {
         file.closeFile()
     }
 
-    func seek(position: Int) {
+    func seek(_ position: Int) {
         self.position = position
-        file.seekToFileOffset(UInt64(position))
+        file.seek(toFileOffset: UInt64(position))
     }
 
     func read() -> UInt8? {
-        let data = file.readDataOfLength(1)
+        let data = file.readData(ofLength: 1)
 
-        guard data.length == 1 else {
+        guard data.count == 1 else {
             seek(position)
 
             return nil
         }
 
-        var bytes = [UInt8](count: 1, repeatedValue: 0)
-        data.getBytes(&bytes, length: 1)
+        var bytes = [UInt8](repeating: 0, count: 1)
+        (data as NSData).getBytes(&bytes, length: 1)
 
         position += 1
 
         return bytes[0]
     }
 
-    func read(length: Int) -> [UInt8]? {
-        let data = file.readDataOfLength(length)
+    func read(_ length: Int) -> [UInt8]? {
+        let data = file.readData(ofLength: length)
 
-        guard data.length == length else {
+        guard data.count == length else {
             seek(position)
 
             return nil
         }
         
-        var bytes = [UInt8](count: length, repeatedValue: 0)
-        data.getBytes(&bytes, length: length)
+        var bytes = [UInt8](repeating: 0, count: length)
+        (data as NSData).getBytes(&bytes, length: length)
         
         position += length
         
