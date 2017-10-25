@@ -15,6 +15,7 @@
 		0089C8921CCE40160023CE7C /* KaitaiStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8911CCE40160023CE7C /* KaitaiStruct.swift */; };
 		0089C8941CCE41530023CE7C /* String+KaitaiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8931CCE41530023CE7C /* String+KaitaiStream.swift */; };
 		0089C8961CCE42100023CE7C /* KaitaiSeekableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */; };
+		DF304D7B1FA0B09C003529FC /* KaitaiSeekableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0089C8951CCE42100023CE7C /* KaitaiSeekableStream.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 				TargetAttributes = {
 					004838551CCA633900B7D738 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0830;
 					};
 					0048385F1CCA633900B7D738 = {
 						CreatedOnToolsVersion = 7.3;
@@ -223,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF304D7B1FA0B09C003529FC /* KaitaiSeekableStream.swift in Sources */,
 				004838661CCA633900B7D738 /* KaitaiStreamTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +348,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -366,6 +370,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    public init?(kaitaiStream:KaitaiStream, encoding:NSStringEncoding) {
+    public init?(kaitaiStream:KaitaiStream, encoding:String.Encoding) {
         guard let string = kaitaiStream.readStrEos(encoding) else {
             return nil
         }
@@ -17,7 +17,7 @@ extension String {
         self = string
     }
 
-    public init?(kaitaiStream:KaitaiStream, length:Int, encoding:NSStringEncoding) {
+    public init?(kaitaiStream:KaitaiStream, length:Int, encoding:String.Encoding) {
         guard let string = kaitaiStream.readStrByteLimit(length,encoding: encoding) else {
             return nil
         }
@@ -25,7 +25,7 @@ extension String {
         self = string
     }
 
-    public init?(kaitaiStream:KaitaiStream, encoding:NSStringEncoding, termination:UInt8, includeTermination:Bool=false,consumeTermination:Bool=true) {
+    public init?(kaitaiStream:KaitaiStream, encoding:String.Encoding, termination:UInt8, includeTermination:Bool=false,consumeTermination:Bool=true) {
         guard let string = kaitaiStream.readStrz(encoding, termination: termination, includeTermination: includeTermination, consumeTermination: consumeTermination) else {
             return nil
         }
