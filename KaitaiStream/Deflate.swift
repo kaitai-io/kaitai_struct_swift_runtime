@@ -119,9 +119,9 @@ open class ZStream {
     deinit{
         if initd{
             if deflater {
-                deflateEnd(&strm)
+                _ = deflateEnd(&strm)
             } else {
-                inflateEnd(&strm)
+                _ = inflateEnd(&strm)
             }
         }
     }
