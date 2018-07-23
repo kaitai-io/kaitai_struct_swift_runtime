@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import zlib
 
 // #pragma mark - KaitaiStream
 open class KaitaiStream {
@@ -366,8 +367,8 @@ open class KaitaiStream {
     open func processZlib(_ bytes:[UInt8]) -> [UInt8]? {
         let inflater = InflateStream()
 
-        var bytes = Array(bytes)
-        let (inflated,err) = inflater.write(&bytes, flush: true)
+        let bytes = Array(bytes)
+        let (inflated,err) = inflater.write(bytes, flush: true)
 
         guard err == nil else {
             return nil
